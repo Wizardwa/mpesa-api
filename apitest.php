@@ -1,8 +1,8 @@
 <?php
 
 function token(){
-	$consumerKey = "kAUTiyPmNVLiBHJe2OWm7YYnStGVUVUhQDRGeGcYFbLlKNhp";
-	$consumerSecret = "CJmfvRCGk3mPzT15FJshOWFTRvfgPmjQIZTESmwUWRsRLABhGSltRZHXX3AUd0N9";
+	$consumerKey = "VJbxMAcnvGECriHmgm0RtlqsEMNFQqLJjndjMZaOvb9VaaMg";
+	$consumerSecret = "ow5QPOvVazvEElzpKwOLte6wRcr63nF11oVyplMKGNYtCUKZejt6FGSgAlkNaYPc";
 	$auth = base64_encode($consumerKey . ":" . $consumerSecret);
 
 	$creds = "https://sandbox.safaricom.co.ke/oauth/v1/generate?grant_type=client_credentials";
@@ -30,7 +30,7 @@ function token(){
 	        if (isset($data->access_token)) {
 	            // Access token retrieved successfully
 	            $access_token = $data->access_token;
-	            echo "Access token: " . $access_token;
+	            //echo "Access token: " . $access_token;
 	            return $access_token;
 	        } else {
 	            // access_token field not found in the response
@@ -42,5 +42,3 @@ function token(){
 	curl_close($ch);
 
 }
-
-	

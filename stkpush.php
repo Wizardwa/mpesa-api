@@ -26,9 +26,9 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
 		    'PartyA'=> $phonenumber,
 		    'PartyB' => $shortcode,
 		    'PhoneNumber'=> $phonenumber,
-		    'CallBackURL'=> 'https://mydomain.com/b2b/result/',
-		    'AccountReference'=> 'test',
-		    'TransactionDesc'=> 'test'
+		    'CallBackURL'=> 'https://7630-105-163-156-241.ngrok-free.app',
+		    'AccountReference'=> 'SirmaTiesson',
+		    'TransactionDesc'=> 'SirmaTiesson'
 		);
 
 	// Convert the body to x-www-form-urlencoded format
@@ -39,13 +39,41 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
 	curl_setopt($ch2, CURLOPT_URL, $url);
 	curl_setopt($ch2, CURLOPT_POST, true);
 	curl_setopt($ch2, CURLOPT_POSTFIELDS, $body);
+	curl_setopt($ch2, CURLOPT_RETURNTRANSFER, true);
 	$response = curl_exec($ch2);
-	$data =  json_decode($response, true);
+	//$data =  json_decode($response, true);
+
+	if ($response === false) {
+	    // cURL error occurred
+	    echo 'cURL error: ' . curl_error($ch);
+	} else {
+	    // Decode JSON response
+	    $data = json_decode($response);
+
+	    if ($data === null) {
+	        // JSON decoding failed
+	        echo "Error decoding JSON response";
+	    } else {
+	        // Check if CustomerMessage exists in the response
+	        if (isset($data->CustomerMessage)) {
+	            // CustomerMessage retrieved successfully
+	            $message = $data->CustomerMessage;
+	            echo "Message: " . $message;
+	        }elseif (isset($data->errorMessage)) {
+	        	$error = $data->errorMessage;
+	        	echo "Error: " . $error;
+	        }else {
+	            // CustomerMessage field not found in the response
+	            echo "Error: CustomerMessage not found in the response";
+	        }
+	    }
+	}
+
 
 	// Check for curl errors
-	if(curl_errno($ch2)) {
-	    echo 'Curl error: ' . curl_error($ch2);
-	}
+	// if(curl_errno($ch2)) {
+	//     echo 'Curl error: ' . curl_error($ch2);
+	// }
 
 	// Close the curl session
 	curl_close($ch2);

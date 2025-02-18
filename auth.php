@@ -9,7 +9,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
 	$passkey = "bfb279f9aa9bdbcf158e97dd71a467cd2e0c893059b10f78e6b72ada1ed2c919";
 	$password = base64_encode($shortcode.$passkey.$currentDateTime);
 
-	$authtoken = "afBZyPFe0eynKXUMuuARNo8z8kTw";
+	$authtoken = "HXPO8b1XC1J8szRiaLWfzAzxmBem";
 
 
 	$url = "https://sandbox.safaricom.co.ke/mpesa/stkpush/v1/processrequest";
@@ -24,8 +24,8 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
 	    'PartyB' => $shortcode,
 	    'PhoneNumber'=> $phonenumber,
 	    'CallBackURL'=> 'https://mydomain.com/b2b/result/',
-	    'AccountReference'=> 'test',
-	    'TransactionDesc'=> 'test'
+	    'AccountReference'=> 'SirmaTiesson',
+	    'TransactionDesc'=> 'SirmaTiesson'
 	);
 	
 	$body = json_encode($body);
@@ -35,8 +35,34 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
 	curl_setopt($ch, CURLOPT_POST, true);
 	curl_setopt($ch, CURLOPT_POSTFIELDS, $body);
 	curl_setopt($ch, CURLOPT_HTTPHEADER, ['Authorization: Bearer ' . $authtoken, 'Content-Type: application/json']);
+	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 	$response = curl_exec($ch);
-	$response = json_decode($response);
+	
+	if ($response === false) {
+	    // cURL error occurred
+	    echo 'cURL error: ' . curl_error($ch);
+	} else {
+	    // Decode JSON response
+	    $data = json_decode($response);
+
+	    if ($data === null) {
+	        // JSON decoding failed
+	        echo "Error decoding JSON response";
+	    } else {
+	        // Check if CustomerMessage exists in the response
+	        if (isset($data->CustomerMessage)) {
+	            // CustomerMessage retrieved successfully
+	            $message = $data->CustomerMessage;
+	            echo "Message: " . $message;
+	        }elseif (isset($data->errorMessage)) {
+	        	$error = $data->errorMessage;
+	        	echo "Error: " . $error;
+	        }else {
+	            // CustomerMessage field not found in the response
+	            echo "Error: CustomerMessage not found in the response";
+	        }
+	    }
+	}
 
 
 
