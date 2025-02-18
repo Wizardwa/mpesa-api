@@ -37,6 +37,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
 	//$authtoken = "afBZyPFe0eynKXUMuuARNo8z8kTw";
 	curl_setopt($ch2, CURLOPT_HTTPHEADER, ['Authorization: Bearer ' . $authtoken, 'Content-Type: application/json']);
 	curl_setopt($ch2, CURLOPT_URL, $url);
+	curl_setopt($ch2, CURLOPT_SSL_VERIFYPEER, false);
 	curl_setopt($ch2, CURLOPT_POST, true);
 	curl_setopt($ch2, CURLOPT_POSTFIELDS, $body);
 	curl_setopt($ch2, CURLOPT_RETURNTRANSFER, true);
@@ -45,7 +46,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
 
 	if ($response === false) {
 	    // cURL error occurred
-	    echo 'cURL error: ' . curl_error($ch);
+	    echo 'cURL error: ' . curl_error($ch2);
 	} else {
 	    //Decode JSON response
 	    $data = json_decode($response);
