@@ -26,7 +26,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
 		    'PartyA'=> $phonenumber,
 		    'PartyB' => $shortcode,
 		    'PhoneNumber'=> $phonenumber,
-		    'CallBackURL'=> 'https://7630-105-163-156-241.ngrok-free.app',
+		    'CallBackURL'=> 'https://ed42-102-0-8-22.ngrok-free.app',
 		    'AccountReference'=> 'SirmaTiesson',
 		    'TransactionDesc'=> 'SirmaTiesson'
 		);
@@ -47,9 +47,10 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
 	    // cURL error occurred
 	    echo 'cURL error: ' . curl_error($ch);
 	} else {
-	    // Decode JSON response
+	    //Decode JSON response
 	    $data = json_decode($response);
-
+	    echo $response;
+	    
 	    if ($data === null) {
 	        // JSON decoding failed
 	        echo "Error decoding JSON response";
@@ -79,6 +80,12 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
 	curl_close($ch2);
 
 }
+//store CheckoutRequestID,MerchantRequestID
+// echo '<br>';
+// echo "CheckoutRequestID: " . $data->CheckoutRequestID;
+// echo '<br>';
+// echo "MerchantRequestID: " . $data->MerchantRequestID;
+
 
 
 ?>

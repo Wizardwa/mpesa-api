@@ -24,8 +24,8 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
 	    'PartyB' => $shortcode,
 	    'PhoneNumber'=> $phonenumber,
 	    'CallBackURL'=> 'https://mydomain.com/b2b/result/',
-	    'AccountReference'=> 'SirmaTiesson',
-	    'TransactionDesc'=> 'SirmaTiesson'
+	    'AccountReference'=> 'test',
+	    'TransactionDesc'=> 'test'
 	);
 	
 	$body = json_encode($body);
