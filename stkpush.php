@@ -26,7 +26,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
 		    'PartyA'=> $phonenumber,
 		    'PartyB' => $shortcode,
 		    'PhoneNumber'=> $phonenumber,
-		    'CallBackURL'=> 'https://ed42-102-0-8-22.ngrok-free.app',
+		    'CallBackURL'=> 'https://proper-pig-nationally.ngrok-free.app/confirmation',
 		    'AccountReference'=> 'SirmaTiesson',
 		    'TransactionDesc'=> 'SirmaTiesson'
 		);
@@ -81,11 +81,10 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
 	curl_close($ch2);
 
 }
-//store CheckoutRequestID,MerchantRequestID
-// echo '<br>';
-// echo "CheckoutRequestID: " . $data->CheckoutRequestID;
-// echo '<br>';
-// echo "MerchantRequestID: " . $data->MerchantRequestID;
+//Transaction Status
+// $data->CheckoutRequestID;
+// $data->MerchantRequestID;
+
 
 
 
